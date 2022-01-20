@@ -1,5 +1,5 @@
 import time
-#test
+#testing
 import pybullet as p
 
 physicsClient = p.connect(p.GUI)
