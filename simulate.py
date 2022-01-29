@@ -8,7 +8,8 @@ physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
 p.setGravity(0,0,-9.8)
 planeID = p.loadURDF("plane.urdf")
-p.loadSDF("boxs.sdf")
+robotID = p.loadURDF("body.urdf")
+p.loadSDF("world.sdf")
 i = 0
 while run:
     time.sleep(1/60)
