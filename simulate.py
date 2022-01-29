@@ -1,8 +1,5 @@
 import time
 import pybullet_data
-
-
-#test
 import pybullet as p
 
 run = True
