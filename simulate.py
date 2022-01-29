@@ -1,8 +1,6 @@
 import time
 import pybullet_data
 
-#Single Link -> https://imgur.com/3eGoPiT
-#Many links -> https://imgur.com/gallery/sml7fZC
 
 #test
 import pybullet as p
