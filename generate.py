@@ -1,8 +1,8 @@
 import pyrosim.pyrosim as pyrosim
 
 
-x = 0
-y = 0
+x = .5
+y = .5
 z = .5
 
 length = 1
@@ -16,10 +16,14 @@ def Create_World():
 
 def Create_Robot():
     pyrosim.Start_URDF("body.urdf")
-    pyrosim.Send_Cube(name="Link0", pos=[x, y, z], size=[length, width, height])
-    pyrosim.Send_Joint(name="Link0_Link1", parent="Link0", child="Link1",
-                       type="revolute", position=[0, 1, 1])
-    pyrosim.Send_Cube(name="Link1", pos=[0, 0, .5], size=[length, width, height])
+    pyrosim.Send_Cube(name="BackLeg", pos=[x, y, z], size=[length, width, height])
+    pyrosim.Send_Joint(name="BackLeg-Torso", parent="BackLeg", child="Torso",
+                       type="revolute", position=[1, 0, 1])
+    pyrosim.Send_Cube(name="Torso", pos=[.5, .5, .5], size=[length, width, height])
+    pyrosim.Send_Joint(name="Torso-FrontLeg", parent="Torso", child="FrontLeg",
+                       type="revolute", position=[1,.5,0])
+    pyrosim.Send_Cube(name="FrontLeg", pos=[.5, 0, -.5], size=[length, width, height])
+
     pyrosim.End()
 
 
