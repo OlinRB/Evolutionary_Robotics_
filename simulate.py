@@ -12,12 +12,11 @@ p.setGravity(0,0,-9.8)
 
 planeID = p.loadURDF("plane.urdf")
 robotID = p.loadURDF("body.urdf")
-p.loadSDF("world.sdf")
+#p.loadSDF("world.sdf")
 i = 0
 
 pyrosim.Prepare_To_Simulate(robotID)
 while run:
-
     p.stepSimulation()
     backLegTouch = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
     print(backLegTouch)
