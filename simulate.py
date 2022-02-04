@@ -2,6 +2,7 @@ import time
 import pybullet_data
 import pybullet as p
 
+#Sensors
 run = True
 
 physicsClient = p.connect(p.GUI)
