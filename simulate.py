@@ -8,7 +8,7 @@ import numpy as np
 
 #Sensors
 run = True
-LOOP_LEN = 100
+LOOP_LEN = 10000
 
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -28,6 +28,12 @@ for i in range(LOOP_LEN):
     p.stepSimulation()
     backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
     frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
+    pyrosim.Set_Motor_For_Joint(
+        bodyIndex=robotID,
+        jointName="BackLeg_Torso",
+        controlMode=p.POSITION_CONTROL,
+        targetPosition=0.0,
+        maxForce=500)
     time.sleep(1 / 60)
 p.disconnect()
 np.save(file1, backLegSensorValues)
