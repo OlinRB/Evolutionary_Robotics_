@@ -7,7 +7,12 @@ with open("data\\sensor_values.npy", "rb") as file:
 with open("data\\frontLegSensorValues.npy", "rb") as file:
     front_values = np.load(file)
 
-plot.plot(back_values, label="Back Leg Sensor Values", linewidth=5)
-plot.plot(front_values, label="Front Leg Sensor Values")
+with open("data\\targetValues.npy", "rb") as file:
+    target_values = np.load(file)
+
+print(target_values)
+plot.plot(target_values, label="Target Values")
+# plot.plot(back_values, label="Back Leg Sensor Values", linewidth=5)
+# plot.plot(front_values, label="Front Leg Sensor Values")
 plot.legend()
 plot.show()
