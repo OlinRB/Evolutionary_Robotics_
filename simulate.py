@@ -10,6 +10,7 @@ import random
 #Sensors
 run = True
 LOOP_LEN = 1000
+#Refactoring
 
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
