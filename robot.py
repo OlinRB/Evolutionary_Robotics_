@@ -17,4 +17,5 @@ class ROBOT:
             self.sensors[linkName] = SENSOR(linkName)
 
     def Sense(self, index):
-        for link in self.sensors:
+        for linkName in self.sensors:
+            SENSOR.Get_Value(self.sensors[linkName], index)

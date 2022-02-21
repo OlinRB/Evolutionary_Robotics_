@@ -1,5 +1,5 @@
 import numpy as np
-LOOP_LEN = 1000
+LOOP_LEN = 100
 motor_val = 15
 amplitude_BackLeg = np.pi/4
 frequency_BackLeg = 8
