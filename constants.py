@@ -1,6 +1,6 @@
 import numpy as np
 LOOP_LEN = 1000
-motor_val = 50
+motor_val = 30
 amplitude_BackLeg = np.pi/4
 frequency_BackLeg = 8
 phaseOffset_BackLeg = 5
