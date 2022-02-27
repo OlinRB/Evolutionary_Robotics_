@@ -22,7 +22,6 @@ class MOTOR:
         else:
             direction = 1
             frequency = self.frequency/2
-            print(self.motorValues[index-1])
         self.motorValues[index] = self.amplitude * \
                                   np.sin(frequency * self.motorValues[index]
                                          + self.offset)
