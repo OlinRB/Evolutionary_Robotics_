@@ -1,5 +1,5 @@
 import pyrosim.pyrosim as pyrosim
-
+import random
 
 x = .5
 y = .5
@@ -33,20 +33,6 @@ def Create_Robot():
 
 def Generate_Body():
     pyrosim.Start_URDF("body.urdf")
-    # pyrosim.Send_Cube(name="Torso", pos=[0, 0, 1.5], size=[length, width, height])
-    # pyrosim.Send_Joint(name="Torso_FrontLeg", parent="Torso", child="FrontLeg", type="revolute", position=[.5, 0, 1])
-    # pyrosim.Send_Cube(name="FrontLeg", pos=[0.5, 0, -0.5], size=[length, width, height])
-    # pyrosim.Send_Joint(name="Torso_BackLeg", parent="Torso", child="BackLeg", type="revolute", position=[-.5, 0, 1])
-    # pyrosim.Send_Cube(name="BackLeg", pos=[-.5, 0, -.5], size=[length, width, height])
-
-
-    # pyrosim.Send_Cube(name="BackLeg", pos=[x, y, z], size=[length, width, height])
-    # pyrosim.Send_Joint(name="Torso_BackLeg", parent="BackLeg", child="Torso",
-    #                    type="revolute", position=[1, 0, 1])
-    # pyrosim.Send_Cube(name="Torso", pos=[.5, .5, .5], size=[length, width, height])
-    # pyrosim.Send_Joint(name="Torso_FrontLeg", parent="Torso", child="FrontLeg",
-    #                    type="revolute", position=[1,.5,0])
-    # pyrosim.Send_Cube(name="FrontLeg", pos=[.5, 0, -.5], size=[length, width, height])
 
     pyrosim.Send_Cube(name="Torso", pos=[1.5, 0, 1.5], size=[length, width, height])
     pyrosim.Send_Joint(name="Torso_FrontLeg", parent="Torso", child="FrontLeg", type="revolute", position=[2, 0, 1])
@@ -66,9 +52,21 @@ def Generate_Brain():
     pyrosim.Send_Motor_Neuron(name=3, jointName="Torso_BackLeg")
     pyrosim.Send_Motor_Neuron(name=4, jointName="Torso_FrontLeg")
 
-    pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=3, weight=3.0)
-    pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=4, weight=2.0)
-    pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=4, weight=-1.0)
+    sensors = [1,2,3]
+    motors = [3,4]
+    # for sensor in sensors:
+    #     for motor in motors:
+    #         pyrosim.Send_Synapse(sourceNeuronName=sensor, targetNeuronName=motor, weight=random.uniform(-1,1))
+    #pyrosim.Send_Synapse(sourceNeuronName=0, targetNeuronName=3, weight=-2.0)
+    pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=3, weight=-.5)
+    pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=3, weight=1.25)
+
+    pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=4, weight=-1.0)
+    pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=3, weight=1.0)
+
+    # pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=3, weight=-1.0)
+    # pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=3, weight=-5.0)
+    # pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=4, weight=1.0)
 
 
     pyrosim.End()
