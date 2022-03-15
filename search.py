@@ -1,5 +1,15 @@
 import os
 
-for i in range(1):
-    os.system("python generate.py")
-    os.system("python simulate.py")
+from hillclimber import HILL_CLIMBER
+
+
+hc = HILL_CLIMBER()
+#hc.Evolve()
+hc.Show_Best()
+
+
+
+
+# for i in range(1):
+#     os.system("python generate.py")
+#     os.system("python simulate.py")
