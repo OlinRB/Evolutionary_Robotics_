@@ -28,15 +28,13 @@ class HILL_CLIMBER:
 
         for currentGeneration in range(c.numberOfGenerations):
             if currentGeneration == c.numberOfGenerations-1:
-                self.Evolve_For_One_Generation("GUI")
+                self.Evolve_For_One_Generation("DIRECT")
             else:
                 self.Evolve_For_One_Generation("DIRECT")
 
     def Show_Best(self):
-        self.Spawn()
-        self.Mutate()
-        self.parent.Evaluate("GUI")
-        self.Print()
+        self.Evolve_For_One_Generation("GUI")
+        print("Parent Fitness: {}".format(self.parent.fitness))
 
 
     def Spawn(self):

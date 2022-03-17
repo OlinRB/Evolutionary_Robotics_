@@ -10,6 +10,7 @@ import pyrosim.pyrosim as pyrosim
 class SIMULATION:
 
     def __init__(self, GUI):
+        self.mode = GUI
         if GUI == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
         else:
@@ -26,7 +27,8 @@ class SIMULATION:
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.Act(i)
-            time.sleep(1 / 60)
+            if self.mode == "GUI":
+                time.sleep(1 / 60)
 
     def Get_Fitness(self):
         self.robot.Get_Fitness()
