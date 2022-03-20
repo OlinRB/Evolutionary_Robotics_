@@ -1,11 +1,11 @@
 import os
 
-from hillclimber import HILL_CLIMBER
+from parallelHillClimber import PARELLEL_HILL_CLIMBER
 
 
-hc = HILL_CLIMBER()
-hc.Evolve()
-hc.Show_Best()
+phc = PARELLEL_HILL_CLIMBER()
+phc.Evolve()
+#phc.Show_Best()
 
 
 

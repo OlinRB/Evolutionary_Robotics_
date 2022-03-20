@@ -1,3 +1,4 @@
+import time
 
 import numpy
 
@@ -12,7 +13,8 @@ height = 1
 
 class SOLUTION:
 
-    def __init__(self):
+    def __init__(self, myID):
+        self.myID = myID
         self.weights = [[numpy.random.rand(),numpy.random.rand()],
                         [numpy.random.rand(),numpy.random.rand()],
                         [numpy.random.rand(),numpy.random.rand()]]
@@ -27,8 +29,10 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system("python simulate.py {}".format(GUI))
-        with open('fitness.txt', 'r') as f:
+        os.system("start /B python simulate.py {} {}".format(GUI, self.myID))
+        while not os.path.exists('fitness{}.txt'.format(self.myID)):
+            time.sleep(0.01)
+        with open('fitness{}.txt'.format(self.myID), 'r') as f:
             result = f.readline()
             result = float(result)
         self.fitness = result
@@ -50,7 +54,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork("brain{}.nndf".format(self.myID))
         pyrosim.Send_Sensor_Neuron(name=0, linkName="Torso")
         pyrosim.Send_Sensor_Neuron(name=1, linkName="BackLeg")
         pyrosim.Send_Sensor_Neuron(name=2, linkName="FrontLeg")
@@ -76,5 +80,10 @@ class SOLUTION:
 
 
         self.weights[randRow][randColumn] = random.random() * 2 - 1
+
+
+    def Set_ID(self, ID):
+        # self.myID = ID
+        self.childID = ID
 
 

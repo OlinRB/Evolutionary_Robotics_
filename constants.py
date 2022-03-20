@@ -1,7 +1,8 @@
 import numpy as np
-LOOP_LEN = 1500
+LOOP_LEN = 50
 motor_val = 30
-numberOfGenerations = 10
+numberOfGenerations = 3
+populationSize = 2
 amplitude_BackLeg = np.pi/4
 frequency_BackLeg = 8
 phaseOffset_BackLeg = 5
