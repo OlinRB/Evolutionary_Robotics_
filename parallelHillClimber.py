@@ -1,3 +1,4 @@
+import time
 
 from solution import SOLUTION
 import constants as c
@@ -10,9 +11,11 @@ class PARELLEL_HILL_CLIMBER:
         os.system("del brain*.nndf")
         os.system("del fitness*.txt")
         os.system("del tmp*.txt")
+
         self.parents = {}
         self.nextAvailableID = 0
         for i in range(c.populationSize):
+            print(i)
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
 
@@ -35,12 +38,12 @@ class PARELLEL_HILL_CLIMBER:
     def Evolve(self):
         self.Evaluate(self.parents)
 
-        for parent in self.parents:
-            self.parent = self.parents[parent]
-            for currentGeneration in range(c.numberOfGenerations):
-                self.Evolve_For_One_Generation("DIRECT")
-                # self.parent.Start_Simulation("GUI")
-            #self.Show_Best()
+        # for parent in self.parents:
+        #     self.parent = self.parents[parent]
+        #     for currentGeneration in range(c.numberOfGenerations):
+        #         self.Evolve_For_One_Generation("DIRECT")
+        #         # self.parent.Start_Simulation("GUI")
+        #     #self.Show_Best()
 
     def Show_Best(self):
         #pass
@@ -68,10 +71,10 @@ class PARELLEL_HILL_CLIMBER:
 
 
     def Evaluate(self, solutions):
-        for parent in solutions:
-            self.parent = self.parents[parent]
-            self.parent.Start_Simulation("GUI")
 
         for parent in solutions:
-            self.parent = self.parents[parent]
-            self.parent.Wait_For_Simulation_To_End()
+            self.parents[parent].Start_Simulation("GUI")
+
+        # for parent in solutions:
+        #     self.parent = self.parents[parent]
+        #     self.parent.Wait_For_Simulation_To_End()

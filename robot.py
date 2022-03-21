@@ -54,4 +54,4 @@ class ROBOT:
         with open('tmp{}.txt'.format(solutionID), 'w') as f:
             f.write(str(xCoordinateOfLinkZero))
 
-        os.system("rename tmpID.txt fitness.ID.txt")
+        os.rename("tmp"+str(solutionID)+".txt" , "fitness"+str(solutionID)+".txt")

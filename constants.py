@@ -1,5 +1,5 @@
 import numpy as np
-LOOP_LEN = 50
+LOOP_LEN = 500
 motor_val = 30
 numberOfGenerations = 3
 populationSize = 2
