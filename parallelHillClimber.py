@@ -34,7 +34,7 @@ class PARELLEL_HILL_CLIMBER:
         #
         self.Print()
         #
-        # self.Select()
+        self.Select()
 
     def Evolve(self):
         self.Evaluate(self.parents)
@@ -42,12 +42,17 @@ class PARELLEL_HILL_CLIMBER:
             self.parent = self.parents[parent]
             for currentGeneration in range(c.numberOfGenerations):
                 self.Evolve_For_One_Generation("DIRECT")
-        #     #self.Show_Best()
 
     def Show_Best(self):
-        #pass
-        self.Evolve_For_One_Generation("GUI")
-        #print("Parent Fitness: {}".format(self.parent.fitness))
+        best = 100
+        bestIdx = 0
+        for parent in self.parents:
+            if self.parents[parent].fitness < best:
+                bestIdx = parent
+                best = self.parents[parent].fitness
+
+        # Show best sim
+        self.parents[bestIdx].Start_Simulation("GUI")
 
 
     def Spawn(self):
@@ -65,6 +70,12 @@ class PARELLEL_HILL_CLIMBER:
 
 
     def Select(self):
+        for index in self.parents:
+            if self.children[index].fitness < self.parents[index].fitness:
+                self.parents[index] = self.children[index]
+
+
+
         if self.child.fitness > self.parent.fitness:
             self.parent = self.child
 
