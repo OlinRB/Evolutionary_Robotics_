@@ -8,9 +8,9 @@ class PARELLEL_HILL_CLIMBER:
 
 
     def __init__(self):
-        # os.system("del brain*.nndf")
-        # os.system("del fitness*.txt")
-        # os.system("del tmp*.txt")
+        os.system("del brain*.nndf")
+        os.system("del fitness*.txt")
+        os.system("del tmp*.txt")
 
         self.parents = {}
         self.nextAvailableID = 0
@@ -21,28 +21,27 @@ class PARELLEL_HILL_CLIMBER:
 
 
     def Print(self):
-        print("\nParent fitness: {}, Child fitness: {}\n".format(self.parent.fitness, self.child.fitness))
+        for i in range(len(self.parents)):
+            print("\n\nParent{} fitness: {}, Child{} fitness: {}\n".format(i,self.parents[i].fitness, i, self.children[i].fitness))
 
     def Evolve_For_One_Generation(self,mode):
 
         self.Spawn()
         #
-        # self.Mutate()
+        self.Mutate()
         #
-        # self.child.Evaluate(mode)
+        self.Evaluate(self.children)
         #
-        # self.Print()
+        self.Print()
         #
         # self.Select()
 
     def Evolve(self):
         self.Evaluate(self.parents)
-
-        # for parent in self.parents:
-        #     self.parent = self.parents[parent]
-        #     for currentGeneration in range(c.numberOfGenerations):
-        #         self.Evolve_For_One_Generation("DIRECT")
-        #         # self.parent.Start_Simulation("GUI")
+        for parent in self.parents:
+            self.parent = self.parents[parent]
+            for currentGeneration in range(c.numberOfGenerations):
+                self.Evolve_For_One_Generation("DIRECT")
         #     #self.Show_Best()
 
     def Show_Best(self):
@@ -72,11 +71,11 @@ class PARELLEL_HILL_CLIMBER:
 
     def Evaluate(self, solutions):
 
-        for parent in solutions:
-            self.parents[parent].Start_Simulation("DIRECT")
+        for solution in solutions:
+            solutions[solution].Start_Simulation("DIRECT")
 
-        for parent in solutions:
-            self.parents[parent].Wait_For_Simulation_To_End()
+        for solution in solutions:
+            solutions[solution].Wait_For_Simulation_To_End()
 
         # for parent in solutions:
         #     self.parent = self.parents[parent]

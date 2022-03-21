@@ -50,7 +50,7 @@ class SOLUTION:
             result = f.readline()
             result = float(result)
         self.fitness = result
-        print("\n\nFitness of ID: {}, = {}".format(self.myID, self.fitness))
+        #print("\n\nFitness of ID: {}, = {}".format(self.myID, self.fitness))
         os.system("del fitness{}.txt".format(self.myID))
 
     def Create_World(self):
