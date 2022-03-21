@@ -3,6 +3,7 @@ import time
 import numpy
 
 import pyrosim.pyrosim as pyrosim
+import constants as c
 from constants import*
 import random
 import os
@@ -46,9 +47,14 @@ class SOLUTION:
     def Wait_For_Simulation_To_End(self):
         while not os.path.exists('fitness{}.txt'.format(self.myID)):
             time.sleep(0.01)
-        with open('fitness{}.txt'.format(self.myID), 'r') as f:
-            result = f.readline()
-            result = float(result)
+        # while not os.access('fitness{}.txt'.format(self.myID), os.R_OK):
+        #     time.sleep(0.01)
+        try:
+            with open('fitness{}.txt'.format(self.myID), 'r') as f:
+                result = f.readline()
+                result = float(result)
+        except PermissionError:
+            result = c.badResult
         self.fitness = result
         #print("\n\nFitness of ID: {}, = {}".format(self.myID, self.fitness))
         os.system("del fitness{}.txt".format(self.myID))
