@@ -25,17 +25,17 @@ class SOLUTION:
 
         # self.weights * 2 - 1
 
-    def Evaluate(self, GUI):
-        self.Create_World()
-        self.Create_Body()
-        self.Create_Brain()
-        os.system("start /B python simulate.py {} {}".format(GUI, self.myID))
-        while not os.path.exists('fitness{}.txt'.format(self.myID)):
-            time.sleep(0.01)
-        with open('fitness{}.txt'.format(self.myID), 'r') as f:
-            result = f.readline()
-            result = float(result)
-        self.fitness = result
+    # def Evaluate(self, GUI):
+    #     self.Create_World()
+    #     self.Create_Body()
+    #     self.Create_Brain()
+    #     os.system("start /B python simulate.py {} {}".format(GUI, self.myID))
+    #     while not os.path.exists('fitness{}.txt'.format(self.myID)):
+    #         time.sleep(0.01)
+    #     with open('fitness{}.txt'.format(self.myID), 'r') as f:
+    #         result = f.readline()
+    #         result = float(result)
+    #     self.fitness = result
 
     def Start_Simulation(self, GUI):
         self.Create_World()
@@ -50,6 +50,7 @@ class SOLUTION:
             result = f.readline()
             result = float(result)
         self.fitness = result
+        print("\n\nFitness of ID: {}, = {}".format(self.myID, self.fitness))
         os.system("del fitness{}.txt".format(self.myID))
 
     def Create_World(self):

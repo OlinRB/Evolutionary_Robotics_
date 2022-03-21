@@ -8,14 +8,14 @@ class PARELLEL_HILL_CLIMBER:
 
 
     def __init__(self):
-        os.system("del brain*.nndf")
-        os.system("del fitness*.txt")
-        os.system("del tmp*.txt")
+        # os.system("del brain*.nndf")
+        # os.system("del fitness*.txt")
+        # os.system("del tmp*.txt")
 
         self.parents = {}
         self.nextAvailableID = 0
         for i in range(c.populationSize):
-            print(i)
+            print(i) # Sometimes spawns empty pybullet window
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
 
@@ -73,7 +73,10 @@ class PARELLEL_HILL_CLIMBER:
     def Evaluate(self, solutions):
 
         for parent in solutions:
-            self.parents[parent].Start_Simulation("GUI")
+            self.parents[parent].Start_Simulation("DIRECT")
+
+        for parent in solutions:
+            self.parents[parent].Wait_For_Simulation_To_End()
 
         # for parent in solutions:
         #     self.parent = self.parents[parent]
