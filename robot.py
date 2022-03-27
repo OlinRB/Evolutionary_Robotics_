@@ -8,12 +8,22 @@ import os
 class ROBOT:
     def __init__(self, solutionID):
         self.solutionID = solutionID
-        self.robotID = p.loadURDF("body.urdf")
+        body = self.Load_Body()
+        while not body:
+            body = self.Load_Body()
         pyrosim.Prepare_To_Simulate(self.robotID)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
         self.nn = NEURAL_NETWORK("brain{}.nndf".format(self.solutionID))
         os.system("del brain{}.nndf".format(self.solutionID))
+
+    def Load_Body(self):
+        try:
+            self.robotID = p.loadURDF("body.urdf")
+            return True
+
+        except:
+            return False
 
 
     def Prepare_To_Sense(self):
