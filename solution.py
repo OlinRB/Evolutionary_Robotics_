@@ -86,19 +86,20 @@ class SOLUTION:
 
         sensors = [1, 2, 3]
         motors = [3, 4]
-        for currentRow in range(len(sensors)):
-            for currentColumn in range(len(motors)):
-                pyrosim.Send_Synapse(sourceNeuronName=sensors[currentRow],
-                                     targetNeuronName=motors[currentColumn], weight=self.weights[currentRow][currentColumn])
+        for currentRow in range(c.numSensorNeurons):
+            for currentColumn in range(c.numMotorNeurons):
+                pyrosim.Send_Synapse(sourceNeuronName=currentRow,
+                                     targetNeuronName=currentColumn + c.numSensorNeurons,
+                                     weight=self.weights[currentRow][currentColumn])
 
         pyrosim.End()
 
 
     def Mutate(self):
 
-        randRow = random.randint(0, 2)
+        randRow = random.randint(0, c.numSensorNeurons-1)
 
-        randColumn = random.randint(0, 1)
+        randColumn = random.randint(0, c.numMotorNeurons-1)
 
 
         self.weights[randRow][randColumn] = random.random() * 2 - 1
