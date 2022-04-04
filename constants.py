@@ -7,8 +7,8 @@ numberOfGenerations = 1
 populationSize = 1
 
 # Num Neurons
-numSensorNeurons = 9
-numMotorNeurons = 8
+numSensorNeurons = 10
+numMotorNeurons = 10
 
 # Multipliers
 amplitude_BackLeg = np.pi/4
