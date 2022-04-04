@@ -3,8 +3,8 @@ LOOP_LEN = 1000
 motor_val = 35
 badResult = 0
 # Population
-numberOfGenerations = 1
-populationSize = 1
+numberOfGenerations = 5
+populationSize = 10
 
 # Num Neurons
 numSensorNeurons = 10

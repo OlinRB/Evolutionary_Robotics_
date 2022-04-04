@@ -44,10 +44,10 @@ class PARELLEL_HILL_CLIMBER:
                 self.Evolve_For_One_Generation("DIRECT")
 
     def Show_Best(self):
-        best = 100
+        best = 0
         bestIdx = 0
         for parent in self.parents:
-            if self.parents[parent].fitness < best:
+            if self.parents[parent].fitness > best:
                 bestIdx = parent
                 best = self.parents[parent].fitness
 
