@@ -1,14 +1,17 @@
 import numpy as np
-LOOP_LEN = 1000
+LOOP_LEN = 2000
+
 motor_val = 35
 badResult = 0
 # Population
-numberOfGenerations = 5
+numberOfGenerations = 50
 populationSize = 10
 
 # Num Neurons
 numSensorNeurons = 10
-numMotorNeurons = 10
+numMotorNeurons = 12
+
+building = False
 
 # Multipliers
 amplitude_BackLeg = np.pi/4

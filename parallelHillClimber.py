@@ -71,7 +71,7 @@ class PARELLEL_HILL_CLIMBER:
 
     def Select(self):
         for index in self.parents:
-            if self.children[index].fitness < self.parents[index].fitness:
+            if self.children[index].fitness > self.parents[index].fitness:
                 self.parents[index] = self.children[index]
 
 
