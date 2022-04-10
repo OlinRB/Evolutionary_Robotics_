@@ -1,12 +1,13 @@
 import time
 
-import numpy
+import numpy as np
 
 import pyrosim.pyrosim as pyrosim
 import constants as c
 from constants import *
 import random
 import os
+
 
 length = 1
 width = 1
@@ -17,8 +18,14 @@ class SOLUTION:
 
     def __init__(self, myID):
         self.myID = myID
-        self.weights = numpy.random.rand(c.numSensorNeurons, c.numMotorNeurons)
-        self.weights = self.weights * 2 - 1
+        probability = random.randint(1,3)
+        if probability != 1:
+            file = open("best_weights", "rb")
+            self.weights = np.load(file)
+            file.close()
+        else:
+            self.weights = np.random.rand(c.numSensorNeurons, c.numMotorNeurons)
+            self.weights = self.weights * 2 - 1
 
 
     def Start_Simulation(self, GUI):

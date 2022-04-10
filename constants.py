@@ -1,15 +1,18 @@
 import numpy as np
-LOOP_LEN = 2000
+LOOP_LEN = 3000
 
 motor_val = 35
 badResult = 0
 # Population
-numberOfGenerations = 50
-populationSize = 10
+numberOfGenerations = 3
+populationSize = 3
 
 # Num Neurons
 numSensorNeurons = 10
 numMotorNeurons = 12
+
+xMultiplier = 5
+zMultiplier = 2
 
 building = False
 

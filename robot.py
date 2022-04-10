@@ -70,7 +70,9 @@ class ROBOT:
         # print(zPosition)
         # exit()
 
+        fitness = xPosition * c.xMultiplier + zPosition ** c.zMultiplier
+
         with open('tmp{}.txt'.format(solutionID), 'w') as f:
-            f.write(str(xPosition * zPosition))
+            f.write(str(fitness))
 
         os.rename("tmp"+str(solutionID)+".txt" , "fitness"+str(solutionID)+".txt")

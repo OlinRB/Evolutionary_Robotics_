@@ -4,6 +4,7 @@ from solution import SOLUTION
 import constants as c
 import copy
 import os
+import numpy as np
 class PARELLEL_HILL_CLIMBER:
 
 
@@ -12,6 +13,7 @@ class PARELLEL_HILL_CLIMBER:
         os.system("del fitness*.txt")
         os.system("del tmp*.txt")
 
+        self.best_fitness = 0
         self.parents = {}
         self.nextAvailableID = 0
         for i in range(c.populationSize):
@@ -53,6 +55,27 @@ class PARELLEL_HILL_CLIMBER:
 
         # Show best sim
         self.parents[bestIdx].Start_Simulation("GUI")
+
+        # Save weights if fitness is best yet on record
+        self.Check_Best()
+        if self.parents[bestIdx].fitness > self.best_fitness:
+            file = open("best_weights", "wb")
+            np.save(file, self.parents[bestIdx].weights)
+            file.close()
+
+            # Write best fitness to file
+            fitness_file = open("best_fitness.txt", "w")
+            fitness_file.write(str(self.parents[bestIdx].fitness))
+            fitness_file.close()
+
+    def Check_Best(self):
+        with open('best_fitness.txt', 'r') as f:
+            result = f.readline()
+            if result == '':
+                self.best_fitness = 0
+            else:
+                self.best_fitness = float(result)
+
 
 
     def Spawn(self):
