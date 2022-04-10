@@ -24,7 +24,8 @@ class PARELLEL_HILL_CLIMBER:
 
     def Print(self):
         for i in range(len(self.parents)):
-            print("\n\nParent{} fitness: {}, Child{} fitness: {}\n".format(i,self.parents[i].fitness, i, self.children[i].fitness))
+            print("\nParent{} fitness: {}, Child{} fitness: {}".format(i,self.parents[i].fitness, i, self.children[i].fitness))
+            print("Brain: {}".format(self.parents[i].brain))
 
     def Evolve_For_One_Generation(self,mode):
 

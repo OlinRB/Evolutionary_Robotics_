@@ -1,4 +1,5 @@
 import os
+import constants as c
 
 from parallelHillClimber import PARELLEL_HILL_CLIMBER
 
@@ -7,7 +8,8 @@ phc = PARELLEL_HILL_CLIMBER()
 # phc.Check_Best()
 phc.Evolve()
 # Wait for keyboard input before showing final sim
-input("Press any key to continue... ")
+if not c.building:
+    input("Press any key to continue... ")
 phc.Show_Best()
 
 

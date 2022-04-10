@@ -4,14 +4,14 @@ LOOP_LEN = 3000
 motor_val = 35
 badResult = 0
 # Population
-numberOfGenerations = 3
-populationSize = 3
+numberOfGenerations = 1
+populationSize = 1
 
 # Num Neurons
 numSensorNeurons = 10
 numMotorNeurons = 12
 
-xMultiplier = 5
+xMultiplier = 2
 zMultiplier = 2
 
 building = False

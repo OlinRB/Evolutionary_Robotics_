@@ -67,10 +67,9 @@ class ROBOT:
 
         xPosition = basePosition[0]
         zPosition = basePosition[2]
-        # print(zPosition)
-        # exit()
 
-        fitness = xPosition * c.xMultiplier + zPosition ** c.zMultiplier
+
+        fitness = xPosition * c.xMultiplier + zPosition * c.zMultiplier
 
         with open('tmp{}.txt'.format(solutionID), 'w') as f:
             f.write(str(fitness))
