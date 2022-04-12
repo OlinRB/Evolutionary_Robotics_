@@ -88,7 +88,7 @@ class SOLUTION:
 
         """  LOWER BODY   """
 
-        # Left Leg
+        # Upper Legs
 
         pyrosim.Send_Joint(name="Torso_UpperLleg", parent="Torso", child="UpperLleg", type="revolute",
                            position=[0,.3,-1.1], jointAxis="0 1 0")
@@ -104,27 +104,27 @@ class SOLUTION:
         # Lower legs
 
         pyrosim.Send_Joint(name="UpperLleg_LowerLleg", parent="UpperLleg", child="LowerLleg", type="revolute",
-                           position=[-.4, 0, -.8], jointAxis="0 1 0")
+                           position=[0, 0, -.8], jointAxis="0 1 0")
 
-        pyrosim.Send_Cube(name="LowerLleg", pos=[.4, 0, 0], size=[.3, .4, .8])
+        pyrosim.Send_Cube(name="LowerLleg", pos=[0, 0, 0], size=[.3, .4, .8])
 
         pyrosim.Send_Joint(name="UpperRleg_LowerRleg", parent="UpperRleg", child="LowerRleg", type="revolute",
-                           position=[.4,0,-.7], jointAxis="0 1 0")
+                           position=[0,0,-.8], jointAxis="0 1 0")
 
-        pyrosim.Send_Cube(name="LowerRleg", pos=[-.4, 0, 0], size=[.3, .4, .8])
+        pyrosim.Send_Cube(name="LowerRleg", pos=[0, 0, 0], size=[.3, .4, .8])
 
 
         # Feet
 
         pyrosim.Send_Joint(name="LowerLleg_LFoot", parent="LowerLleg", child="LFoot", type="revolute",
-                           position=[0, 0, -.5], jointAxis="0 1 0")
+                           position=[.15, 0, -.5], jointAxis="0 1 0")
 
-        pyrosim.Send_Cube(name="LFoot", pos=[.5,0,0], size=[.7,.3,.2])
+        pyrosim.Send_Cube(name="LFoot", pos=[0,0,0], size=[.7,.3,.2])
 
         pyrosim.Send_Joint(name="LowerRleg_RFoot", parent="LowerRleg", child="RFoot", type="revolute",
-                           position=[0, 0, -.5], jointAxis="0 1 0")
+                           position=[.15, 0, -.5], jointAxis="0 1 0")
 
-        pyrosim.Send_Cube(name="RFoot", pos=[.5, 0, 0], size=[.7, .3, .2])
+        pyrosim.Send_Cube(name="RFoot", pos=[0, 0, 0], size=[.7, .3, .2])
 
 
 
