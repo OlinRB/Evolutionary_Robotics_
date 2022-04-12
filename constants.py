@@ -1,7 +1,7 @@
 import numpy as np
 LOOP_LEN = 3000
 
-motor_val = 150
+motor_val = 200
 badResult = 0
 # Population
 numberOfGenerations = 5
