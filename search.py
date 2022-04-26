@@ -6,12 +6,13 @@ import constants as c
 
 for i in range(c.RUN_RANGE):
     phc = PARELLEL_HILL_CLIMBER()
-    # phc.Check_Best()
     phc.Evolve()
+    phc.Check_Best()
+    phc.Show_Best(False)
 # Wait for keyboard input before showing final sim
 if not c.building:
     input("Press any key to continue... ")
-phc.Show_Best()
+phc.Show_Best(True)
 
 
 

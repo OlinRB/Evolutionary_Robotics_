@@ -1,17 +1,24 @@
 import numpy as np
 LOOP_LEN = 3000
 
-RUN_RANGE = 1
+RUN_RANGE = 10
 
 motor_val = 200
 badResult = 0
 # Population
+populationSize = 5
 numberOfGenerations = 10
-populationSize = 10
+
+NO_ARMS = True
 
 # Num Neurons
-numSensorNeurons = 6
-numMotorNeurons = 6
+if NO_ARMS:
+    numSensorNeurons = 6
+    numMotorNeurons = 6
+
+else:
+    numSensorNeurons = 10
+    numMotorNeurons = 12
 
 xMultiplier = 2
 zMultiplier = 3

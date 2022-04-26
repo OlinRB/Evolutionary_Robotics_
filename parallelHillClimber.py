@@ -46,7 +46,7 @@ class PARELLEL_HILL_CLIMBER:
             for currentGeneration in range(c.numberOfGenerations):
                 self.Evolve_For_One_Generation("DIRECT")
 
-    def Show_Best(self):
+    def Show_Best(self, last):
         best = 0
         bestIdx = 0
         for parent in self.parents:
@@ -55,7 +55,8 @@ class PARELLEL_HILL_CLIMBER:
                 best = self.parents[parent].fitness
 
         # Show best sim
-        self.parents[bestIdx].Start_Simulation("GUI")
+        if last:
+            self.parents[bestIdx].Start_Simulation("GUI")
 
         # Save weights if fitness is best yet on record
         self.Check_Best()

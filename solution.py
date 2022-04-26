@@ -4,9 +4,9 @@ import numpy as np
 
 import pyrosim.pyrosim as pyrosim
 import constants as c
-from constants import *
 import random
 import os
+from os.path import exists
 
 
 length = 1
@@ -18,8 +18,9 @@ class SOLUTION:
 
     def __init__(self, myID):
         self.myID = myID
-        probability = random.randint(1,3)
-        if probability != 1:
+        probability = random.randint(1,5)
+        file_exists = exists("C:\\Users\\olinr\\Evolutionary_Robotics_\\best_weights")
+        if probability < 4 and file_exists:
             self.brain = "From File"
             file = open("best_weights", "rb")
             self.weights = np.load(file)
@@ -132,71 +133,89 @@ class SOLUTION:
 
         # Shoulders and arms
         #
-        # pyrosim.Send_Joint(name="Torso_Lshoulder", parent="Torso", child="Lshoulder", type="revolute",
-        #                    position=[0,.5,.55], jointAxis="1 1 0")
-        #
-        # pyrosim.Send_Cube(name="Lshoulder", pos=[0, 0, 0], size=[.3, .2, .2])
-        #
-        #
-        # pyrosim.Send_Joint(name="Torso_Rshoulder", parent="Torso", child="Rshoulder", type="revolute",
-        #                    position=[0, -.5, .55], jointAxis="1 1 0")
-        #
-        # pyrosim.Send_Cube(name="Rshoulder", pos=[0, 0, 0], size=[.3, .2, .2])
+        if not c.NO_ARMS:
+            pyrosim.Send_Joint(name="Torso_Lshoulder", parent="Torso", child="Lshoulder", type="revolute",
+                               position=[0,.5,.55], jointAxis="1 1 0")
+
+            pyrosim.Send_Cube(name="Lshoulder", pos=[0, 0, 0], size=[.3, .2, .2])
+
+
+            pyrosim.Send_Joint(name="Torso_Rshoulder", parent="Torso", child="Rshoulder", type="revolute",
+                               position=[0, -.5, .55], jointAxis="1 1 0")
+
+            pyrosim.Send_Cube(name="Rshoulder", pos=[0, 0, 0], size=[.3, .2, .2])
 
 
         # Arms
 
-        # pyrosim.Send_Joint(name="Lshoulder_LUpperArm", parent="Lshoulder", child="LUpperArm", type="revolute",
-        #                    position=[0, .2, -.3], jointAxis="0 1 0")
-        #
-        # pyrosim.Send_Cube(name="LUpperArm", pos=[0, 0, 0], size=[.2, .2, .75])
-        #
-        # pyrosim.Send_Joint(name="LUpperArm_LLowerArm", parent="LUpperArm", child="LLowerArm", type="revolute",
-        #                    position=[0, 0, -.7], jointAxis="0 1 0")
-        #
-        # pyrosim.Send_Cube(name="LLowerArm", pos=[0, 0, 0], size=[.1, .2, .7])
+            pyrosim.Send_Joint(name="Lshoulder_LUpperArm", parent="Lshoulder", child="LUpperArm", type="revolute",
+                               position=[0, .2, -.3], jointAxis="0 1 0")
+
+            pyrosim.Send_Cube(name="LUpperArm", pos=[0, 0, 0], size=[.2, .2, .75])
+
+            pyrosim.Send_Joint(name="LUpperArm_LLowerArm", parent="LUpperArm", child="LLowerArm", type="revolute",
+                               position=[0, 0, -.7], jointAxis="0 1 0")
+
+            pyrosim.Send_Cube(name="LLowerArm", pos=[0, 0, 0], size=[.1, .2, .7])
 
 
-        # pyrosim.Send_Joint(name="Rshoulder_RUpperArm", parent="Rshoulder", child="RUpperArm", type="revolute",
-        #                    position=[0, -.2, -.3], jointAxis="1 1 1")
-        #
-        # pyrosim.Send_Cube(name="RUpperArm", pos=[0, 0, 0], size=[.2, .2, .75])
-        #
-        # pyrosim.Send_Joint(name="RUpperArm_RLowerArm", parent="RUpperArm", child="RLowerArm", type="revolute",
-        #                    position=[0, 0, -.7], jointAxis="0 1 0")
-        #
-        # pyrosim.Send_Cube(name="RLowerArm", pos=[0, 0, 0], size=[.1, .2, .7])
+            pyrosim.Send_Joint(name="Rshoulder_RUpperArm", parent="Rshoulder", child="RUpperArm", type="revolute",
+                               position=[0, -.2, -.3], jointAxis="1 1 1")
+
+            pyrosim.Send_Cube(name="RUpperArm", pos=[0, 0, 0], size=[.2, .2, .75])
+
+            pyrosim.Send_Joint(name="RUpperArm_RLowerArm", parent="RUpperArm", child="RLowerArm", type="revolute",
+                               position=[0, 0, -.7], jointAxis="0 1 0")
+
+            pyrosim.Send_Cube(name="RLowerArm", pos=[0, 0, 0], size=[.1, .2, .7])
 
         pyrosim.End()
 
     def Create_Brain(self):
         pyrosim.Start_NeuralNetwork("brain{}.nndf".format(self.myID))
 
-        pyrosim.Send_Sensor_Neuron(name=0, linkName="LFoot")
-        pyrosim.Send_Sensor_Neuron(name=1, linkName="RFoot")
-        pyrosim.Send_Sensor_Neuron(name=2, linkName="LowerLleg")
-        pyrosim.Send_Sensor_Neuron(name=3, linkName="LowerRleg")
-        pyrosim.Send_Sensor_Neuron(name=4, linkName="UpperLleg")
-        pyrosim.Send_Sensor_Neuron(name=5, linkName="UpperRleg")
-        # pyrosim.Send_Sensor_Neuron(name=6, linkName="LUpperArm")
-        # pyrosim.Send_Sensor_Neuron(name=7, linkName="RUpperArm")
-        # pyrosim.Send_Sensor_Neuron(name=8, linkName="LLowerArm")
-        # pyrosim.Send_Sensor_Neuron(name=9, linkName="RLowerArm")
+        if c.NO_ARMS: # Robot with no arms
+            pyrosim.Send_Sensor_Neuron(name=0, linkName="LFoot")
+            pyrosim.Send_Sensor_Neuron(name=1, linkName="RFoot")
+            pyrosim.Send_Sensor_Neuron(name=2, linkName="LowerLleg")
+            pyrosim.Send_Sensor_Neuron(name=3, linkName="LowerRleg")
+            pyrosim.Send_Sensor_Neuron(name=4, linkName="UpperLleg")
+            pyrosim.Send_Sensor_Neuron(name=5, linkName="UpperRleg")
 
-        if not c.building:
-            pyrosim.Send_Motor_Neuron(name=6, jointName="LowerLleg_LFoot")
-            pyrosim.Send_Motor_Neuron(name=7, jointName="LowerRleg_RFoot")
-            pyrosim.Send_Motor_Neuron(name=8, jointName="UpperLleg_LowerLleg")
-            pyrosim.Send_Motor_Neuron(name=9, jointName="UpperRleg_LowerRleg")
-            pyrosim.Send_Motor_Neuron(name=10, jointName="Torso_UpperLleg")
-            pyrosim.Send_Motor_Neuron(name=11, jointName="Torso_UpperRleg")
+            if not c.building:
+                pyrosim.Send_Motor_Neuron(name=6, jointName="LowerLleg_LFoot")
+                pyrosim.Send_Motor_Neuron(name=7, jointName="LowerRleg_RFoot")
+                pyrosim.Send_Motor_Neuron(name=8, jointName="UpperLleg_LowerLleg")
+                pyrosim.Send_Motor_Neuron(name=9, jointName="UpperRleg_LowerRleg")
+                pyrosim.Send_Motor_Neuron(name=10, jointName="Torso_UpperLleg")
+                pyrosim.Send_Motor_Neuron(name=11, jointName="Torso_UpperRleg")
 
-            # pyrosim.Send_Motor_Neuron(name=17, jointName="Lshoulder_LUpperArm")
-            # pyrosim.Send_Motor_Neuron(name=18, jointName="Rshoulder_RUpperArm")
-            # pyrosim.Send_Motor_Neuron(name=19, jointName="LUpperArm_LLowerArm")
-            # pyrosim.Send_Motor_Neuron(name=20, jointName="RUpperArm_RLowerArm")
-            # pyrosim.Send_Motor_Neuron(name=21, jointName="Torso_Lshoulder")
-            # pyrosim.Send_Motor_Neuron(name=22, jointName="Torso_Rshoulder")
+        else: # Robot with arms
+            pyrosim.Send_Sensor_Neuron(name=0, linkName="LFoot")
+            pyrosim.Send_Sensor_Neuron(name=1, linkName="RFoot")
+            pyrosim.Send_Sensor_Neuron(name=2, linkName="LowerLleg")
+            pyrosim.Send_Sensor_Neuron(name=3, linkName="LowerRleg")
+            pyrosim.Send_Sensor_Neuron(name=4, linkName="UpperLleg")
+            pyrosim.Send_Sensor_Neuron(name=5, linkName="UpperRleg")
+            pyrosim.Send_Sensor_Neuron(name=6, linkName="LUpperArm")
+            pyrosim.Send_Sensor_Neuron(name=7, linkName="RUpperArm")
+            pyrosim.Send_Sensor_Neuron(name=8, linkName="LLowerArm")
+            pyrosim.Send_Sensor_Neuron(name=9, linkName="RLowerArm")
+
+            if not c.building:
+                pyrosim.Send_Motor_Neuron(name=10, jointName="LowerLleg_LFoot")
+                pyrosim.Send_Motor_Neuron(name=11, jointName="LowerRleg_RFoot")
+                pyrosim.Send_Motor_Neuron(name=12, jointName="UpperLleg_LowerLleg")
+                pyrosim.Send_Motor_Neuron(name=13, jointName="UpperRleg_LowerRleg")
+                pyrosim.Send_Motor_Neuron(name=14, jointName="Torso_UpperLleg")
+                pyrosim.Send_Motor_Neuron(name=15, jointName="Torso_UpperRleg")
+
+                pyrosim.Send_Motor_Neuron(name=16, jointName="Lshoulder_LUpperArm")
+                pyrosim.Send_Motor_Neuron(name=17, jointName="Rshoulder_RUpperArm")
+                pyrosim.Send_Motor_Neuron(name=18, jointName="LUpperArm_LLowerArm")
+                pyrosim.Send_Motor_Neuron(name=19, jointName="RUpperArm_RLowerArm")
+                pyrosim.Send_Motor_Neuron(name=20, jointName="Torso_Lshoulder")
+                pyrosim.Send_Motor_Neuron(name=21, jointName="Torso_Rshoulder")
 
 
         for currentRow in range(c.numSensorNeurons):
