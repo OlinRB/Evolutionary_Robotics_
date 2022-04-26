@@ -1,13 +1,13 @@
 import numpy as np
 LOOP_LEN = 3000
 
-RUN_RANGE = 10
+RUN_RANGE = 1
 
 motor_val = 200
 badResult = 0
 # Population
-populationSize = 5
-numberOfGenerations = 10
+populationSize = 1
+numberOfGenerations = 1
 
 NO_ARMS = True
 

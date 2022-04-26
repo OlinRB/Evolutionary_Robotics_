@@ -5,6 +5,8 @@ from motor import MOTOR
 from pyrosim.neuralNetwork import NEURAL_NETWORK
 import constants as c
 import os
+import time
+
 
 class ROBOT:
     def __init__(self, solutionID):
@@ -17,6 +19,9 @@ class ROBOT:
         self.Prepare_To_Act()
         self.nn = NEURAL_NETWORK("brain{}.nndf".format(self.solutionID))
         os.system("del brain{}.nndf".format(self.solutionID))
+
+        self.start_time = time.time()
+        self.end_time = None
 
     def Load_Body(self):
         try:
@@ -54,7 +59,14 @@ class ROBOT:
                 desiredAngle = self.nn.Get_Value_Of(neuronName) * c.motorJointRange
                 MOTOR.Set_Value(self.motors[jointName], desiredAngle, self.robotID)
                 #print("NN name: {}, Joint Name: {}, Value: {}".format(neuronName, jointName, desiredAngle))
+        # Record time robot was standing
 
+    def Check_Z_Val(self):
+        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotID)
+        basePosition = basePositionAndOrientation[0]
+        zPosition = basePosition[2]
+        if zPosition < 2.5:
+            self.end_time = time.time()
 
     def Get_Fitness(self, solutionID):
         # self.stateOfLinkZero = p.getLinkState(self.robotID,0)
@@ -68,13 +80,13 @@ class ROBOT:
         xPosition = basePosition[0]
         zPosition = basePosition[2]
 
+        # Determine time robot was upright
+        if self.end_time is None:
+            self.end_time = time.time()
 
+        upright_time = self.end_time - self.start_time
 
-        # fitness = xPosition
-        # if zPosition > 2:
-        #     fitness += 2
-
-        fitness = xPosition * (zPosition ** 3)
+        fitness = xPosition * (zPosition ** 3) * upright_time
 
         with open('tmp{}.txt'.format(solutionID), 'w') as f:
             f.write(str(fitness))
