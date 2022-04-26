@@ -131,41 +131,41 @@ class SOLUTION:
         """ UPPER BODY  """
 
         # Shoulders and arms
-
-        pyrosim.Send_Joint(name="Torso_Lshoulder", parent="Torso", child="Lshoulder", type="revolute",
-                           position=[0,.5,.55], jointAxis="1 1 0")
-
-        pyrosim.Send_Cube(name="Lshoulder", pos=[0, 0, 0], size=[.3, .2, .2])
-
-
-        pyrosim.Send_Joint(name="Torso_Rshoulder", parent="Torso", child="Rshoulder", type="revolute",
-                           position=[0, -.5, .55], jointAxis="1 1 0")
-
-        pyrosim.Send_Cube(name="Rshoulder", pos=[0, 0, 0], size=[.3, .2, .2])
+        #
+        # pyrosim.Send_Joint(name="Torso_Lshoulder", parent="Torso", child="Lshoulder", type="revolute",
+        #                    position=[0,.5,.55], jointAxis="1 1 0")
+        #
+        # pyrosim.Send_Cube(name="Lshoulder", pos=[0, 0, 0], size=[.3, .2, .2])
+        #
+        #
+        # pyrosim.Send_Joint(name="Torso_Rshoulder", parent="Torso", child="Rshoulder", type="revolute",
+        #                    position=[0, -.5, .55], jointAxis="1 1 0")
+        #
+        # pyrosim.Send_Cube(name="Rshoulder", pos=[0, 0, 0], size=[.3, .2, .2])
 
 
         # Arms
 
-        pyrosim.Send_Joint(name="Lshoulder_LUpperArm", parent="Lshoulder", child="LUpperArm", type="revolute",
-                           position=[0, .2, -.3], jointAxis="1 1 0")
+        # pyrosim.Send_Joint(name="Lshoulder_LUpperArm", parent="Lshoulder", child="LUpperArm", type="revolute",
+        #                    position=[0, .2, -.3], jointAxis="0 1 0")
+        #
+        # pyrosim.Send_Cube(name="LUpperArm", pos=[0, 0, 0], size=[.2, .2, .75])
+        #
+        # pyrosim.Send_Joint(name="LUpperArm_LLowerArm", parent="LUpperArm", child="LLowerArm", type="revolute",
+        #                    position=[0, 0, -.7], jointAxis="0 1 0")
+        #
+        # pyrosim.Send_Cube(name="LLowerArm", pos=[0, 0, 0], size=[.1, .2, .7])
 
-        pyrosim.Send_Cube(name="LUpperArm", pos=[0, 0, 0], size=[.2, .2, .75])
 
-        pyrosim.Send_Joint(name="LUpperArm_LLowerArm", parent="LUpperArm", child="LLowerArm", type="revolute",
-                           position=[0, 0, -.7], jointAxis="0 1 0")
-
-        pyrosim.Send_Cube(name="LLowerArm", pos=[0, 0, 0], size=[.1, .2, .7])
-
-
-        pyrosim.Send_Joint(name="Rshoulder_RUpperArm", parent="Rshoulder", child="RUpperArm", type="revolute",
-                           position=[0, -.2, -.3], jointAxis="1 1 1")
-
-        pyrosim.Send_Cube(name="RUpperArm", pos=[0, 0, 0], size=[.2, .2, .75])
-
-        pyrosim.Send_Joint(name="RUpperArm_RLowerArm", parent="RUpperArm", child="RLowerArm", type="revolute",
-                           position=[0, 0, -.7], jointAxis="0 1 0")
-
-        pyrosim.Send_Cube(name="RLowerArm", pos=[0, 0, 0], size=[.1, .2, .7])
+        # pyrosim.Send_Joint(name="Rshoulder_RUpperArm", parent="Rshoulder", child="RUpperArm", type="revolute",
+        #                    position=[0, -.2, -.3], jointAxis="1 1 1")
+        #
+        # pyrosim.Send_Cube(name="RUpperArm", pos=[0, 0, 0], size=[.2, .2, .75])
+        #
+        # pyrosim.Send_Joint(name="RUpperArm_RLowerArm", parent="RUpperArm", child="RLowerArm", type="revolute",
+        #                    position=[0, 0, -.7], jointAxis="0 1 0")
+        #
+        # pyrosim.Send_Cube(name="RLowerArm", pos=[0, 0, 0], size=[.1, .2, .7])
 
         pyrosim.End()
 
@@ -178,25 +178,25 @@ class SOLUTION:
         pyrosim.Send_Sensor_Neuron(name=3, linkName="LowerRleg")
         pyrosim.Send_Sensor_Neuron(name=4, linkName="UpperLleg")
         pyrosim.Send_Sensor_Neuron(name=5, linkName="UpperRleg")
-        pyrosim.Send_Sensor_Neuron(name=6, linkName="LUpperArm")
-        pyrosim.Send_Sensor_Neuron(name=7, linkName="RUpperArm")
-        pyrosim.Send_Sensor_Neuron(name=8, linkName="LLowerArm")
-        pyrosim.Send_Sensor_Neuron(name=9, linkName="RLowerArm")
+        # pyrosim.Send_Sensor_Neuron(name=6, linkName="LUpperArm")
+        # pyrosim.Send_Sensor_Neuron(name=7, linkName="RUpperArm")
+        # pyrosim.Send_Sensor_Neuron(name=8, linkName="LLowerArm")
+        # pyrosim.Send_Sensor_Neuron(name=9, linkName="RLowerArm")
 
         if not c.building:
-            pyrosim.Send_Motor_Neuron(name=10, jointName="LowerLleg_LFoot")
-            pyrosim.Send_Motor_Neuron(name=11, jointName="LowerRleg_RFoot")
-            pyrosim.Send_Motor_Neuron(name=12, jointName="UpperLleg_LowerLleg")
-            pyrosim.Send_Motor_Neuron(name=13, jointName="UpperRleg_LowerRleg")
-            pyrosim.Send_Motor_Neuron(name=15, jointName="Torso_UpperLleg")
-            pyrosim.Send_Motor_Neuron(name=16, jointName="Torso_UpperRleg")
+            pyrosim.Send_Motor_Neuron(name=6, jointName="LowerLleg_LFoot")
+            pyrosim.Send_Motor_Neuron(name=7, jointName="LowerRleg_RFoot")
+            pyrosim.Send_Motor_Neuron(name=8, jointName="UpperLleg_LowerLleg")
+            pyrosim.Send_Motor_Neuron(name=9, jointName="UpperRleg_LowerRleg")
+            pyrosim.Send_Motor_Neuron(name=10, jointName="Torso_UpperLleg")
+            pyrosim.Send_Motor_Neuron(name=11, jointName="Torso_UpperRleg")
 
-            pyrosim.Send_Motor_Neuron(name=17, jointName="Lshoulder_LUpperArm")
-            pyrosim.Send_Motor_Neuron(name=18, jointName="Rshoulder_RUpperArm")
-            pyrosim.Send_Motor_Neuron(name=19, jointName="LUpperArm_LLowerArm")
-            pyrosim.Send_Motor_Neuron(name=20, jointName="RUpperArm_RLowerArm")
-            pyrosim.Send_Motor_Neuron(name=21, jointName="Torso_Lshoulder")
-            pyrosim.Send_Motor_Neuron(name=22, jointName="Torso_Rshoulder")
+            # pyrosim.Send_Motor_Neuron(name=17, jointName="Lshoulder_LUpperArm")
+            # pyrosim.Send_Motor_Neuron(name=18, jointName="Rshoulder_RUpperArm")
+            # pyrosim.Send_Motor_Neuron(name=19, jointName="LUpperArm_LLowerArm")
+            # pyrosim.Send_Motor_Neuron(name=20, jointName="RUpperArm_RLowerArm")
+            # pyrosim.Send_Motor_Neuron(name=21, jointName="Torso_Lshoulder")
+            # pyrosim.Send_Motor_Neuron(name=22, jointName="Torso_Rshoulder")
 
 
         for currentRow in range(c.numSensorNeurons):
