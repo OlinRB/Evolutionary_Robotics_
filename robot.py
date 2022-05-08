@@ -60,12 +60,13 @@ class ROBOT:
                 MOTOR.Set_Value(self.motors[jointName], desiredAngle, self.robotID)
                 #print("NN name: {}, Joint Name: {}, Value: {}".format(neuronName, jointName, desiredAngle))
         # Record time robot was standing
+        self.Check_Z_Val()
 
     def Check_Z_Val(self):
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotID)
         basePosition = basePositionAndOrientation[0]
         zPosition = basePosition[2]
-        if zPosition < 2.5:
+        if zPosition < 3:
             self.end_time = time.time()
 
     def Get_Fitness(self, solutionID):

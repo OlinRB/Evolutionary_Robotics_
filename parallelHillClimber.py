@@ -9,6 +9,7 @@ class PARELLEL_HILL_CLIMBER:
 
 
     def __init__(self):
+        self.return_fitness = None
         os.system("del brain*.nndf")
         os.system("del fitness*.txt")
         os.system("del tmp*.txt")
@@ -58,6 +59,17 @@ class PARELLEL_HILL_CLIMBER:
         if last:
             self.parents[bestIdx].Start_Simulation("GUI")
 
+        # Write best evolved fitness to csv
+        # if c.NO_ARMS:
+        #     with open("no_arms_phc_fitness.csv", "a+") as file:
+        #         file.write(str(self.parents[bestIdx].fitness) + "\n")
+        # else:
+        #     with open("with_arms_phc_fitness.csv", "a+") as file:
+        #         file.write(str(self.parents[bestIdx].fitness) + "\n")
+        
+        # Save best fitness as field
+        self.return_fitness = self.parents[bestIdx].fitness
+
         # Save weights if fitness is best yet on record
         self.Check_Best()
         if self.parents[bestIdx].fitness > self.best_fitness:
@@ -69,6 +81,7 @@ class PARELLEL_HILL_CLIMBER:
             fitness_file = open("best_fitness.txt", "w")
             fitness_file.write(str(self.parents[bestIdx].fitness))
             fitness_file.close()
+            
 
     def Check_Best(self):
         with open('best_fitness.txt', 'r') as f:
